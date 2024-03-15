@@ -189,4 +189,14 @@ function currentTime() {
   initialized = true
 }
 
+// 10:58 is found near the beginning of pi.  Use this time for a quick screen-shot
+
+function screenshot() {
+  offset = piClockData["1058"][0]
+  unhighlight()
+  selectAndHighlightRange('pi', offset, offset + 4);
+}
+
+//screenshot()
+
 currentTime();  //calling currentTime() function to initiate the process
