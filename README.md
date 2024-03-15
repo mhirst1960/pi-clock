@@ -1,5 +1,5 @@
 # pi-clock (&pi; clock)
-This is a clock base on the digits of &pi;.
+This is a clock based on the digits of &pi;.
 
 It searches for the current time within the first 100,000 digits of Pi 3.14159... and makes the number big and bold for you to see.
 
@@ -48,9 +48,21 @@ The data comes from this file at angio.net:
 
 ## TODO
 
+### seconds
 I'd like to show seconds by highlighting digits scattered around the current hour/minute time.  
 1. Add some functionality to searchpi.py to populate the 60 more values in each row of the data dictionary.
 2. use the data in piclock.js  (without scrolling).  Something like this:
    
    secondsOffset = piClockData[timeString][seconds+1]
+
+### 24 or AM/PM
+
+The clock type is configured with the variable isClock12.  Set it to true for a 12-hour clock (AM/PM).  Set it to false for a 24-hour clock.
+
+It would be better to enable a urls like this:
+
+- http://localhost/12
+- http://localhost/24
+
+
 
