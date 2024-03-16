@@ -1,0 +1,8 @@
+[Desktop Entry] 
+Name=Pi Clock
+
+Exec=/usr/bin/chromium-browser  --app='file:///home/pi/pi-clock/index.html' --start-fullscreen --disable-session-crashed-bubble
+
+Type=application
+Terminal=false
+
