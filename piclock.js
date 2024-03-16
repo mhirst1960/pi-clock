@@ -15,108 +15,15 @@ setInterval(currentTime, 1000);
 // set to false for 24 hour clock (00:00 through 23:59)
 isClock12 = true
 
+pistring = pistringRaw
+
 initialized = false
 previousTime = new Date();   // creating object of Date class
 let previousHour = previousTime.getHours();
 let previousMinute = previousTime.getMinutes();
 
-function getTextNodesIn(node) {
-  var textNodes = [];
-  if (node.nodeType == 3) {
-    textNodes.push(node);
-  } else {
-    var children = node.childNodes;
-    for (var i = 0, len = children.length; i < len; ++i) {
-      textNodes.push.apply(textNodes, getTextNodesIn(children[i]));
-    }
-  }
-  return textNodes;
-}
-
-function setSelectionRange(el, start, end) {
-  if (document.createRange && window.getSelection) {
-    var range = document.createRange();
-    range.selectNodeContents(el);
-    var textNodes = getTextNodesIn(el);
-    var foundStart = false;
-    var charCount = 0, endCharCount;
-
-    for (var i = 0, textNode; textNode = textNodes[i++];) {
-      endCharCount = charCount + textNode.length;
-      if (!foundStart && start >= charCount
-        && (start < endCharCount ||
-          (start == endCharCount && i <= textNodes.length))) {
-        range.setStart(textNode, start - charCount);
-        foundStart = true;
-      }
-      if (foundStart && end <= endCharCount) {
-        range.setEnd(textNode, end - charCount);
-        break;
-      }
-      charCount = endCharCount;
-    }
-
-    var span = document.createElement("span");
-    span.id = "now"
-
-    range.surroundContents(span);
-
-    var sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-  } else if (document.selection && document.body.createTextRange) {
-    var textRange = document.body.createTextRange();
-    textRange.moveToElementText(el);
-    textRange.collapse(true);
-    textRange.moveEnd("character", end);
-    textRange.moveStart("character", start);
-    textRange.select();
-  }
-}
-
-function makeEditableAndHighlight(color) {
-  sel = window.getSelection();
-  if (sel.rangeCount && sel.getRangeAt) {
-    range = sel.getRangeAt(0);
-  }
-  document.designMode = "on";
-  if (range) {
-    sel.removeAllRanges();
-    sel.addRange(range);
-  }
-  // Use HiliteColor since some browsers apply BackColor to the whole block
-  if (!document.execCommand("HiliteColor", false, color)) {
-    document.execCommand("BackColor", false, color);
-  }
-  document.designMode = "off";
-}
-
-function highlight(color) {
-  var range, sel;
-  if (window.getSelection) {
-    // IE9 and non-IE
-    try {
-      if (!document.execCommand("BackColor", false, color)) {
-        makeEditableAndHighlight(color);
-      }
-    } catch (ex) {
-      makeEditableAndHighlight(color)
-    }
-  } else if (document.selection && document.selection.createRange) {
-    // IE <= 8 case
-    range = document.selection.createRange();
-    range.execCommand("BackColor", false, color);
-  }
-}
-
-
-function selectAndHighlightRange(id, start, end) {
-  setSelectionRange(document.getElementById(id), start, end);
-  //highlight("white");
-}
-
-function unhighlight() {
-  document.getElementById('pi').innerHTML = pistring;
+function updatePiDigits() {
+  document.getElementById('pidigits').innerHTML = pistring;
 }
 
 function scrollToNow() {
@@ -131,16 +38,30 @@ function scrollToNow() {
   });
 
 }
-function highlightMinutes() {
-  for (var i = 0, offset; offset = offsets[i++];) {
-    selectAndHighlightRange('pi', offset, offset + 4);
-  }
-}
 
 function pad(num, size) {
   num = num.toString();
   while (num.length < size) num = "0" + num;
   return num;
+}
+
+String.prototype.insert = function(string, index) {
+  if (index > 0)
+  {
+    return this.substring(0, index) + string + this.substring(index, this.length);
+  }
+
+  return string + this;
+};
+
+// create a span element around a section of text
+function addSpan (id, start, length) {
+
+  spanString = "<span id=\"" + id + "\">"
+
+  // insert in reverse order so we don't need to do extra offset calculation
+  pistring = pistringRaw.insert("</span>", start+length)
+  pistring = pistring.insert(spanString, start)
 }
 
 function currentTime() {
@@ -150,7 +71,11 @@ function currentTime() {
   let min = time.getMinutes();
   //let sec = time.getSeconds();
 
-  
+  // 10:58 is near the beginning of Pi.
+  // for debugging or for screenshot you can uncomment these line:
+  //hour = 10
+  //min = 58
+ 
   if (initialized && previousMinute == min && previousHour == hour) {
     return
   }
@@ -182,8 +107,8 @@ function currentTime() {
   // secondsOffset = piClockData[timeString][seconds+1]
   // but should only scroll when minutes are updated
 
-  unhighlight()
-  selectAndHighlightRange('pi', offset, offset + 4);
+  addSpan("now", offset, 4)
+  updatePiDigits()
   scrollToNow()
 
   initialized = true
@@ -193,8 +118,8 @@ function currentTime() {
 
 function screenshot() {
   offset = piClockData["1058"][0]
-  unhighlight()
-  selectAndHighlightRange('pi', offset, offset + 4);
+  updatePiDigits()
+  selectAndHighlightRange('pidigits', offset, offset + 4);
 }
 
 //screenshot()

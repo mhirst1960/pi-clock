@@ -1,0 +1,25 @@
+
+/* Color Theme Swatches in Hex */
+.Architecture-1-hex { color: #4F818C; }
+.Architecture-2-hex { color: #A9D9D4; }
+.Architecture-3-hex { color: #01260A; }
+.Architecture-4-hex { color: #F2A007; }
+.Architecture-5-hex { color: #590202; }
+
+
+  html,
+  body {
+      color: #01260A;
+      background-color: #4F818C;
+  }
+
+  #now {
+      background-color: #01260A;
+      color: #F2A007;
+  }
+
+  #bigpi {
+      color: #590202;
+      background-color: #4F818C;
+  }
+  

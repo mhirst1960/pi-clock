@@ -1,72 +1,42 @@
 
 
+/*
+Some themes from https://color.adobe.com/trends
+@import url("theme-architecture.css");
+@import url("theme-piday.css");
+@import url("theme-botanico.css");
+@import url("theme-gnome.css");
+*/
+
+@import url("theme-gnome.css");
+
 *{
     margin: 0;
     padding: 0;
 
   }
 
-  /* color scheme
-    dark blue: #4F818C
-    light blue: #A9D9D4
-    very dark green: #01260A
-    yellow: #F2A007
-    maroon: #590202
-  */
-
   html,body{
     place-items: center;
     word-wrap: break-word;
-    /*font-family: "Lucida Console", "Courier New", monospace;*/
-    color: #01260A;
-    background-color: #A9D9D4;
   }
 
   #now {
     font-size: 4vw;
-    background-color: #01260A;
-    color: #F2A007;
-  
   }
 
-  ::-moz-selection { /* Code for Firefox */
-    background-color: #01260A;
-    color: #F2A007;
-  }
-
-  ::selection {
-    background-color: #01260A;
-    color: #F2A007;
-  }
-
-  /***For Other Browsers ***/
-::-o-selection {
-  background-color: #01260A;
-  color: #F2A007;
-}
-
-::-ms-selection {
-  background-color: #01260A;
-  color: #F2A007;
-}
-
-/*** For Webkit ***/
-::-webkit-selection {
-  background-color: #01260A;
-  color: #F2A007;
-}
-
-  #pibackground {
+  #bigpi {
     z-index: -1;
     position: fixed;
-    color: #590202;
     font-size: 50.2vw;
     margin: auto;
     width: 100%;
     text-align: center;
+    font-family: "Adobe Arabic";
+
   }
 
-  #pi {
+  #pidigits {
     z-index: 1;
     position: absolute;
     width:100%;
@@ -75,4 +45,26 @@
     font-family: "OCR A Std", "Courier New", monospace;
   }
 
+  ::selection {
+    background-color: transparent;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    background-color: transparent;
+}
+
+/***For Other Browsers ***/
+::-o-selection {
+  background-color: transparent;
+}
+
+::-ms-selection {
+  background-color: transparent;
+}
+
+/*** For Webkit ***/
+::-webkit-selection {
+  background-color: transparent;
+}
 

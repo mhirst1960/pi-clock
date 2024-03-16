@@ -1,0 +1,25 @@
+/* Color Theme Swatches in Hex */
+.Botánico-con-Ceci-Tomasetti-1-hex { color: #776AA6; }
+.Botánico-con-Ceci-Tomasetti-2-hex { color: #484A73; }
+.Botánico-con-Ceci-Tomasetti-3-hex { color: #5888A6; }
+.Botánico-con-Ceci-Tomasetti-4-hex { color: #7ABF85; }
+.Botánico-con-Ceci-Tomasetti-5-hex { color: #BFB3A4; }
+
+
+
+  html,
+  body {
+      color: #484A73;
+      background-color: #7ABF85;
+    }
+
+  #now {
+      background-color: #484A73;
+      color: #BFB3A4;
+  }
+
+  #bigpi {
+      color: #5888A6;
+      background-color: #7ABF85;
+  }
+  

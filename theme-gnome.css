@@ -1,0 +1,22 @@
+/* Color Theme Swatches in Hex */
+.The-Gnome-who-roamed,-childrens-book-illustration-1-hex { color: #2D3773; }
+.The-Gnome-who-roamed,-childrens-book-illustration-2-hex { color: #8C8304; }
+.The-Gnome-who-roamed,-childrens-book-illustration-3-hex { color: #A66D05; }
+.The-Gnome-who-roamed,-childrens-book-illustration-4-hex { color: #F25D07; }
+.The-Gnome-who-roamed,-childrens-book-illustration-5-hex { color: #0D0D0D; }
+
+html,
+body {
+    color: #0D0D0D;
+    background-color: #A66D05;
+}
+
+#now {
+    background-color: #484A73;
+    color: #BFB3A4;
+}
+
+#bigpi {
+    color: #8C8304;
+    background-color: #A66D05;
+}

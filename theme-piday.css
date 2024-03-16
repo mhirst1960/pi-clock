@@ -1,0 +1,23 @@
+/* Color Theme Swatches in Hex */
+.Set-of-stationery-on-school-chalkboard.-International-Pi-Day-1-hex { color: #F2506E; }
+.Set-of-stationery-on-school-chalkboard.-International-Pi-Day-2-hex { color: #618C80; }
+.Set-of-stationery-on-school-chalkboard.-International-Pi-Day-3-hex { color: #F2D338; }
+.Set-of-stationery-on-school-chalkboard.-International-Pi-Day-4-hex { color: #F28705; }
+.Set-of-stationery-on-school-chalkboard.-International-Pi-Day-5-hex { color: #F24130; }
+
+html,
+body {
+    color: #F2D338;
+    background-color: #618C80;
+}
+
+#bigpi {
+    color: #F28705;
+    background-color: #618C80;
+}
+
+#now {
+    background-color: #F28705;
+    color: #F24130;
+}
+

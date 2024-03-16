@@ -4,7 +4,7 @@ This is a clock based on the digits of &pi;.
 It searches for the current time within the first 100,000 digits of Pi 3.14159... and makes the number big and bold for you to see.
 
 ### The time is now 10:58
-![Alt Text](project_images/Screenshot1058.png "The time is 10:58")
+![Alt Text](project_images/Screenshot1058-arch.png "The time is 10:58")
 
 ## Run the Web Server
 
@@ -40,6 +40,40 @@ The file piclockdata.js was created like this:
 
 You don't need to do this yourself.  The file piclockdata.js already exists for you to use.
 
+## Themes
+
+If you want a different color scheme, modify styles.css
+
+Near the top you can copy/paste from the comment to pick a different theme.  Adjust this for example:
+
+  @import url("theme-botanico.css");
+
+Here is a great website to help pick coloc schemes:
+
+https://color.adobe.com/trends
+
+### Architecture
+
+  @import url("theme-architecture.css");
+
+
+![Alt Text](project_images/screenshot1058-arch.png "The time is 10:58")
+### Gnome
+
+  @import url("theme-gnome.css");
+
+![Alt Text](project_images/screenshot0215-gnome.png "The time is 2:15")
+### Pi Day
+
+  @import url("theme-piday.css");
+  
+![Alt Text](project_images/screenshot0314-piday.png "The time is 3:14")
+### Botanico
+
+  @import url("theme-botanico.css");
+
+![Alt Text](project_images/screenshot159-botanico.png "The time is 3:15")
+
 ## Credits
 
 The data comes from this file at angio.net:
@@ -64,5 +98,12 @@ It would be better to enable a urls like this:
 - http://localhost/12
 - http://localhost/24
 
+### Cycle through themes Hourly or Daily
 
+It would be good to have the option to change the theme every once in a while:
 
+- every hour
+- or only at midnight of a new day
+- at a random minute a few times a day
+
+Currently them themes are implement as static CSS.  It would be good to implement the same in a series of javascript functions to change as needed.
