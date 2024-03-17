@@ -19,7 +19,20 @@ Some themes from https://color.adobe.com/trends
   html,body{
     place-items: center;
     word-wrap: break-word;
+    overflow:scroll;
+    /* No need for X scrollbar */
+    overflow-x:hidden;
   }
+
+/* 
+  Hide the vertical scrollbar.  It's ugly.
+  This works for Chrome and Chromium browsers.
+  Note: you can still scroll with mouse wheel or touch screen touch.
+*/
+html,body::-webkit-scrollbar{
+    width:0;
+    background-color:transparent;
+}
 
   #now {
     font-size: 4vw;
