@@ -98,12 +98,4 @@ It would be better to enable a urls like this:
 - http://localhost/12
 - http://localhost/24
 
-### Cycle through themes Hourly or Daily
 
-It would be good to have the option to change the theme every once in a while:
-
-- every hour
-- or only at midnight of a new day
-- at a random minute a few times a day
-
-Currently them themes are implement as static CSS.  It would be good to implement the same in a series of javascript functions to change as needed.

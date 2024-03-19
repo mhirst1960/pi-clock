@@ -171,7 +171,12 @@ fi
 if [ "$installfonts" == 'y' ]; then
     ## ocr a is a cool looking font
     echo installing fonts..
+
+    # font for all the digits of Pi
     sudo unzip -n ocr-a-std-cdnfonts.zip -d /usr/local/share/fonts
+
+    # font for the giant Pi decoration times-roman
+    sudo unzip -n adobe-arabic-regular_fatAt.zip -d /usr/local/share/fonts
 fi
 
 ## Hide desktop clutter

@@ -80,8 +80,6 @@ function currentTime() {
     return
   }
 
-  previousMinute = min 
-  previousHour = hour
 
   //let dayName = time.getDay();
   //let month = time.getMonth();
@@ -111,6 +109,15 @@ function currentTime() {
   updatePiDigits()
   scrollToNow()
 
+  //setTheme(theme)
+  // randomly change the colors every hour
+  if (!initialized || previousHour != hour) {
+    pickRandomTheme()
+  }
+  
+  previousMinute = min 
+  previousHour = hour
+  
   initialized = true
 }
 
@@ -124,4 +131,5 @@ function screenshot() {
 
 //screenshot()
 
-currentTime();  //calling currentTime() function to initiate the process
+currentTime()  //calling currentTime() function to initiate the process
+
