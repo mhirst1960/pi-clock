@@ -14,6 +14,7 @@ setInterval(currentTime, 1000);
 // set to true for AM/PM
 // set to false for 24 hour clock (00:00 through 23:59)
 isClock12 = true
+showSeconds = true
 
 pistring = pistringRaw
 
@@ -21,6 +22,7 @@ initialized = false
 previousTime = new Date();   // creating object of Date class
 let previousHour = previousTime.getHours();
 let previousMinute = previousTime.getMinutes();
+let previousSecond = previousTime.getSeconds();
 
 function updatePiDigits() {
   document.getElementById('pidigits').innerHTML = pistring;
@@ -60,8 +62,46 @@ function addSpan (id, start, length) {
   spanString = "<span id=\"" + id + "\">"
 
   // insert in reverse order so we don't need to do extra offset calculation
-  pistring = pistringRaw.insert("</span>", start+length)
+  pistring = pistring.insert("</span>", start+length)
   pistring = pistring.insert(spanString, start)
+}
+
+function populateSecondsSpans(timeStr) {
+  data = piClockData[timeStr][1]
+
+  // The data is already sorted descending so simply add a new span
+  // for every second without needing to account for earlier populated spans
+
+  for (let index = 0; index < data.length; index++) {
+    const element = data[index];
+    // data contains [pi digit, spanId]
+    addSpan(element[1], element[0], 2)
+  }
+
+}
+
+function highlightSecond(second) {
+  for(let sec = 0; sec < 60; sec++) {
+    id = "sec" + pad(sec,2)
+
+    try {
+      el = document.getElementById(id)
+
+      if (sec == second) {
+        //el.style.color = "black"
+        el.style.color = "#"+currentTheme[THEME_NOW_FG]
+      } else {
+        el.style.color = "#"+currentTheme[THEME_FOREGROUND]
+      }
+    } catch {
+      // ignore errors.  Probably not populated yet
+    }
+
+  }
+}
+
+function init() {
+
 }
 
 function currentTime() {
@@ -69,23 +109,31 @@ function currentTime() {
 
   let hour = time.getHours();
   let min = time.getMinutes();
-  //let sec = time.getSeconds();
+  let sec = time.getSeconds();
 
   // 10:58 is near the beginning of Pi.
   // for debugging or for screenshot you can uncomment these line:
   //hour = 10
   //min = 58
  
+  shouldChangeTheme = false
+
+  if (!initialized || previousHour != hour) {
+    shouldChangeTheme = true
+  }
+  
+  if (showSeconds &&  previousSecond != sec) {
+    highlightSecond(sec)
+  }
+
+  previousSecond = sec
+
   if (initialized && previousMinute == min && previousHour == hour) {
     return
   }
 
-
-  //let dayName = time.getDay();
-  //let month = time.getMonth();
-  //let year = time.getFullYear();
-  //let date = time.getDate();
-
+  previousMinute = min 
+  previousHour = hour
 
   if (isClock12) {
     if (hour > 12) {
@@ -105,31 +153,24 @@ function currentTime() {
   // secondsOffset = piClockData[timeString][seconds+1]
   // but should only scroll when minutes are updated
 
+  pistring = pistringRaw
+
+  populateSecondsSpans(timeString)
+  // hr/sec time should be before all other spans when adding it here
   addSpan("now", offset, 4)
   updatePiDigits()
   scrollToNow()
 
   //setTheme(theme)
   // randomly change the colors every hour
-  if (!initialized || previousHour != hour) {
+  if (shouldChangeTheme) {
     pickRandomTheme()
   }
   
-  previousMinute = min 
-  previousHour = hour
   
   initialized = true
 }
 
-// 10:58 is found near the beginning of pi.  Use this time for a quick screen-shot
-
-function screenshot() {
-  offset = piClockData["1058"][0]
-  updatePiDigits()
-  selectAndHighlightRange('pidigits', offset, offset + 4);
-}
-
-//screenshot()
-
+init()
 currentTime()  //calling currentTime() function to initiate the process
 

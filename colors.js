@@ -33,6 +33,8 @@ const THEME_NOW_BG     = 2
 const THEME_NOW_FG     = 3
 const THEME_BIG_PI     = 4
 
+currentTheme = themeColors["piday"]
+
 function setTheme (theme) {
 
     if (typeof theme === 'string' && theme instanceof String) {
@@ -48,6 +50,8 @@ function setTheme (theme) {
     //theme = themeColors["piday"]
     theme = themeColors[themeName]
 
+    currentTheme = theme
+
     document.body.style.backgroundColor = "#"+theme[THEME_BACKGROUND]
     document.body.style.color = "#"+theme[THEME_FOREGROUND]
     
@@ -59,6 +63,8 @@ function setTheme (theme) {
 
     document.getElementById("bigpi").style.backgroundColor = "#"+theme[THEME_BACKGROUND]
     document.getElementById("bigpi").style.color = "#"+theme[THEME_BIG_PI]
+
+    currentTheme = theme
 
 }
 
