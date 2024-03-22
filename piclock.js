@@ -98,22 +98,38 @@ function highlightSecond(second) {
   }
 }
 
+// call when time is 3:15 for a bigger time of day.  Because it's fun!
+function bigTime () {
+  document.getElementById("now").style.fontSize = "10vw"
+}
+
 function init() {
 
 }
 
 function currentTime() {
-  let time = new Date();   // creating object of Date class
+  let time = new Date()    // creating object of Date class
 
-  let hour = time.getHours();
-  let min = time.getMinutes();
-  let sec = time.getSeconds();
+  let month = time.getMonth() + 1
+  let day = time.getDate()
+  let hour = time.getHours()
+  let min = time.getMinutes()
+  let sec = time.getSeconds()
+
 
   // 10:58 is near the beginning of Pi.
   // for debugging or for screenshot you can uncomment these line:
   //hour = 10
   //min = 58
  
+  // Extra fun on Pi-day
+  //month = 3
+  //day = 14
+  //hour = 1
+  //min = 59
+  //hour = 15
+  //min = 9
+
   shouldChangeTheme = false
 
   if (!initialized || previousHour != hour) {
@@ -157,6 +173,14 @@ function currentTime() {
   // hr/sec time should be before all other spans when adding it here
   addSpan("now", offset, 4)
   updatePiDigits()
+
+  // for fun, when the time is 3:14 (aka Pi-time make it huge
+  // plus some pi-day specials
+  if ((hour == 3 && min == 14) ||
+      (month == 3 && day == 14 &&
+        ((hour == 1 && min == 59) || (hour == 15 && min == 9)))) {
+    bigTime()
+  }
   scrollToNow()
 
   //setTheme(theme)
