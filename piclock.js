@@ -85,13 +85,11 @@ function highlightSecond(second) {
     id = "sec" + pad(sec,2)
 
     try {
-      el = document.getElementById(id)
-
+      
       if (sec == second) {
-        //el.style.color = "black"
-        el.style.color = "#"+currentTheme[THEME_NOW_FG]
+        setSecondsThemeHighlighted(id)
       } else {
-        el.style.color = "#"+currentTheme[THEME_FOREGROUND]
+        setSecondsThemeUnhighlighted(id)
       }
     } catch {
       // ignore errors.  Probably not populated yet
