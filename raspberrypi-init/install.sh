@@ -228,9 +228,9 @@ else
 fi
 
 if [ "$clockstyle" == '24' ]; then
-    cp $SCRIPT_DIR/../scripts/defaults24.js $SCRIPT_DIR/../scripts/userdefaults.js
+    cp $SCRIPT_DIR/../defaults24.js $SCRIPT_DIR/../userdefaults.js
 else
-    cp $SCRIPT_DIR/../scripts/defaults12.js $SCRIPT_DIR/../scripts/userdefaults.js
+    cp $SCRIPT_DIR/../defaults12.js $SCRIPT_DIR/../userdefaults.js
 fi
 
 #echo

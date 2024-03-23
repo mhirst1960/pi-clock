@@ -11,10 +11,11 @@ highlights that number, and scrolls to it.
 
 setInterval(currentTime, 1000);
 
+// These values are found in defaults[12|24].js
 // set to true for AM/PM
 // set to false for 24 hour clock (00:00 through 23:59)
-isClock12 = true
-showSeconds = true
+//isClock12 = true
+//showSeconds = true
 
 pistring = pistringRaw
 
@@ -103,8 +104,19 @@ function bigTime () {
   document.getElementById("now").style.fontSize = "10vw"
 }
 
+
 function init() {
 
+  // for 24-hour clock append to URL this: ?clock-type=24
+
+  urlString = window.location.href
+  url = new URL(urlString)
+  parmClockType = url.searchParams.get("clock-type")
+  if (parmClockType == "12") {
+    isClock12 = true
+  } else if (parmClockType == "24") {
+    isClock12 = false
+  }
 }
 
 function currentTime() {
