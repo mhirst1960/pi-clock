@@ -117,6 +117,14 @@ function init() {
   } else if (parmClockType == "24") {
     isClock12 = false
   }
+
+  parmClockType = url.searchParams.get("show-seconds")
+  if (parmClockType == "yes") {
+    showSeconds = true
+  } else if (parmClockType == "no") {
+    showSeconds = false
+  }
+
 }
 
 function currentTime() {
