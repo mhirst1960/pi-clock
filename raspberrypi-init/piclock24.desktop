@@ -1,7 +1,7 @@
 [Desktop Entry] 
 Name=Pi Clock
 
-Exec=/usr/bin/chromium-browser  --app='file:///home/pi/pi-clock/index.html' --start-fullscreen --disable-session-crashed-bubble
+Exec=/usr/bin/chromium-browser --kiosk /home/pi/pi-clock/index.html?clock-type=24
 
 Type=application
 Terminal=false

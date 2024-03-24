@@ -157,7 +157,9 @@ Note: When you run the script it will always show you what will be installed thn
 
 ### Defaults
 
-By default the script will update your Raspberry Pi with a new picture (Pi) when it boots, and a new backdrop (a different picture of Pi).  It will set things up so the clock is displayed in full screen.
+By default the script will update your Raspberry Pi with a new picture (Pi) when it boots, and a new backdrop (a different picture of Pi).  It will set things up so the clock is displayed in full screen kiosk mode.
+
+Note: to exit the clock from kiosk mode, connect a keyboard and type "CTRL-F4".  That means hold down the Control key while pressing the F4 key.  You will then have full access to the desktop.
 
 By default the clock shows time in 12-hour format (am/pm).  If you want 24-hour format use the option "--style 24"
 
