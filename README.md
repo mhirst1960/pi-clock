@@ -3,8 +3,8 @@ This is a clock based on the digits of &pi;.
 
 It searches for the current time within the first 100,000 digits of Pi 3.14159... and makes the number big and bold for you to see.
 
-### The time is now 10:58
-![Alt Text](project_images/screenshot1058-arch.png "The time is 10:58")
+### 12:36
+![Alt Text](project_images/pi-clock-1236.gif "The time is 12:36")
 
 ## Run the Web Server
 
