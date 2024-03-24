@@ -79,16 +79,16 @@ https://color.adobe.com/trends
 
 ### Architecture
 
-![Alt Text](project_images/screenshot1058-arch.png "The time is 10:58")
+![Alt Text](project_images/pi-clock-1058.png "10:58:30")
 ### Gnome
 
-![Alt Text](project_images/screenshot0215-gnome.png "The time is 2:15")
+![Alt Text](project_images/pi-clock-0330.png "3:30:34")
 ### Pi Day
   
-![Alt Text](project_images/screenshot0314-piday.png "The time is 3:14")
+![Alt Text](project_images/piday-031415.png "3:14:15")
 ### Botanico
 
-![Alt Text](project_images/screenshot159-botanico.png "The time is 3:15")
+![Alt Text](project_images/pi-clock-0159.png "1:59:45")
 
 ## Installation on Raspberry Pi
 
