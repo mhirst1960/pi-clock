@@ -4,8 +4,8 @@
 
 import datetime
 
-#piFile = 'pi1000000.txt'
 piFile = 'pi100000.txt'
+#piFile = 'e100000.txt'
 time = '1415'
 
 indexes = []
@@ -133,7 +133,7 @@ for hour in range(24):
                 maxIndex = index
             
 print ('} // piClockData')
-
+print (f'// last digit used  is {maxIndex}')
 #if good:
 #    print (f"Found all minutes in pi. Maximum index = {maxIndex}")
     
