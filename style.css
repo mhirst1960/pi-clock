@@ -51,6 +51,7 @@ html,body::-webkit-scrollbar{
   #pidigits {
     z-index: 1;
     position: absolute;
+    margin-top: 50px;
     width:100%;
     word-wrap: break-word;
     font-size: 2vw;
