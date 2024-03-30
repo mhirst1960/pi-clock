@@ -71,7 +71,7 @@ You don't need to do this yourself.  The file piclockdata.js already exists for 
 
 ## Themes
 
-Color schemes are defined in colors.js.  Every hour a (sometimes) new theme is randomly selected.  
+Color schemes are defined in colors.js.  Every hour a (sometimes) new theme is randomly selected.  Also, if you have a keyboard attached, you can hit CTRL-F5 (aka refresh).  It will randomly pick another color scheme.
 
 I found this to be a great website to help pick color schemes:
 
@@ -84,7 +84,9 @@ https://color.adobe.com/trends
 
 ![Alt Text](project_images/pi-clock-0330.png "3:30:34")
 ### Pi Day
-  
+
+(Pi time is a special time every single day.  3:14 shows up bigger than any other time of the day.)
+
 ![Alt Text](project_images/piday-031415.png "3:14:15")
 ### Botanico
 

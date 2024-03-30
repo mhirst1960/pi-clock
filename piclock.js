@@ -139,8 +139,13 @@ function currentTime() {
 
   // 10:58 is near the beginning of Pi.
   // for debugging or for screenshot you can uncomment these line:
-  //hour = 10
-  //min = 58
+  //hour = 1
+  //min = 59
+  //sec = 45
+
+  //hour = 3
+  //min = 14
+  //sec = 15
  
   // Extra fun on Pi-day
   //month = 3
@@ -156,9 +161,9 @@ function currentTime() {
     shouldChangeTheme = true
   }
   
-  if (showSeconds &&  previousSecond != sec) {
+  //if (showSeconds &&  previousSecond != sec) {
     highlightSecond(sec)
-  }
+  //}
 
   previousSecond = sec
 
@@ -181,11 +186,6 @@ function currentTime() {
   minutesString = pad(min, 2)
   timeString = hourString + minutesString
   offset = piClockData[timeString][0]
-
-  // TODO it would be cool to show the seconds in nearby digits
-  // with more data we could do something like this:
-  // secondsOffset = piClockData[timeString][seconds+1]
-  // but should only scroll when minutes are updated
 
   pistring = pistringRaw
 
