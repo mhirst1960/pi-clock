@@ -214,6 +214,10 @@ else
 fi
 
 if [ "$runbrowser" == 'y' ]; then
+## TODO
+## on Raspberry Pi5 instead need add this to ~/.config/wayfair.ini:
+## [autostart]
+## chromium = chromium-browser "/home/pi/pi-clock/index.html" --kiosk --noerrdialogs --disable-infobars --no-first-run --ozone-platform=wayland --enable-features=OverlayScrollbar --start-maximized
     ## Auto-start the Chrome browser and run the clock
     echo installing full-screen browser autostart...
 

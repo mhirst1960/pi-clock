@@ -1,7 +1,7 @@
 [Desktop Entry] 
 Name=Pi Clock
 
-Exec=/usr/bin/chromium-browser --kiosk /home/pi/pi-clock/index.html?clock-type=24
+Exec=/usr/bin/chromium-browser --kiosk /home/pi/pi-clock/index.html
 
 Type=application
 Terminal=false
