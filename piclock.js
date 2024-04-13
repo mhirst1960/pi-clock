@@ -20,6 +20,7 @@ setInterval(currentTime, 1000);
 pistring = pistringRaw
 
 initialized = false
+shouldChangeTheme = true
 previousTime = new Date();   // creating object of Date class
 let previousHour = previousTime.getHours();
 let previousMinute = previousTime.getMinutes();
@@ -155,8 +156,6 @@ function currentTime() {
   //hour = 15
   //min = 9
 
-  shouldChangeTheme = false
-
   if (!initialized || previousHour != hour) {
     shouldChangeTheme = true
   }
@@ -207,8 +206,8 @@ function currentTime() {
   // randomly change the colors every hour
   if (shouldChangeTheme) {
     pickRandomTheme()
+    shouldChangeTheme = false
   }
-  
   
   initialized = true
 }
