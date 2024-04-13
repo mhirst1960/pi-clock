@@ -36,6 +36,7 @@ installfonts='y'
 hidetrash='y'
 hidemounts='y'
 autohidecursor='y'
+disableblanking='y'
 
 function usage()
 {
@@ -106,7 +107,7 @@ done
 
 echo "install http server        = $installhttp"
 echo "auto-start browser         = $runbrowser"
-echo "clock style                = $clockstyle"
+echo "clock style (--style $clockstyle)   = $clockstyle"
 echo "Pi splash screen on boot   = $installsplash"
 echo "Pi desktop                 = $installwallpaper"
 echo "Additional Fonts           = $installfonts"
@@ -241,6 +242,12 @@ fi
 #echo 'If you want to hide the cursor, run this command:'
 #echo 'echo point_at_menu=0 >> /home/pi/.config/lxpanel/LXDE-pi/panels/panel'
 #echo
+
+if [ "$disableblanking" == 'y' ]; then
+    #disable screen blanking
+    mkdir -p /home/pi/.config/lxsession/LXDE-pi 
+    cp lxsession-autostart /home/pi/.config/lxsession/LXDE-pi/autostart
+fi
 
 echo
 echo "Please Reboot now."
