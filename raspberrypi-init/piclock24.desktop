@@ -1,7 +1,7 @@
 [Desktop Entry] 
 Name=Pi Clock
 
-Exec=/usr/bin/chromium-browser --kiosk /home/pi/pi-clock/index.html
+sleep 5s && /usr/bin/chromium-browser --noerrdialogs --disable-infobars --kiosk pi-clock/index.html --window-position=0,0 --window-size=1024,6>
 
 Type=application
 Terminal=false
