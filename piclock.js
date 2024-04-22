@@ -9,7 +9,7 @@ highlights that number, and scrolls to it.
 
 */
 
-setInterval(currentTime, 1000);
+setInterval(processCurrentTime, 1000);
 
 // These values are found in defaults[12|24].js
 // set to true for AM/PM
@@ -26,9 +26,13 @@ let previousHour = previousTime.getHours();
 let previousMinute = previousTime.getMinutes();
 let previousSecond = previousTime.getSeconds();
 
+// Reload the digits of pi probably because the hour/minutes have changed so <span> elements are in new positions.
 function updatePiDigits() {
   document.getElementById('pidigits').innerHTML = pistring;
 }
+
+// cause page to scroll to show the current hour/minute,
+// which is a <span> with the id=now
 
 function scrollToNow() {
   var element = document.getElementById('now');
@@ -43,12 +47,14 @@ function scrollToNow() {
 
 }
 
+// prepend leading zero to a number
 function pad(num, size) {
   num = num.toString();
   while (num.length < size) num = "0" + num;
   return num;
 }
 
+// A function to insert some text at a certain position.
 String.prototype.insert = function(string, index) {
   if (index > 0)
   {
@@ -58,7 +64,7 @@ String.prototype.insert = function(string, index) {
   return string + this;
 };
 
-// create a span element around a section of text
+// Create a span element around a section of text
 function addSpan (id, start, length) {
 
   spanString = "<span id=\"" + id + "\">"
@@ -67,6 +73,14 @@ function addSpan (id, start, length) {
   pistring = pistring.insert("</span>", start+length)
   pistring = pistring.insert(spanString, start)
 }
+
+// the span IDs for each of the seconds 0-59 are found
+// as a string in piClockData
+// for the current hour/minute
+// offset is stored in reverse order: deepest into pi first.
+// so there is no need to compensate for previously populated <span> elements.
+// This works because no <spans> have previously been populated
+// in the string at any index lower than the one being inserted.
 
 function populateSecondsSpans(timeStr) {
   data = piClockData[timeStr][1]
@@ -81,6 +95,8 @@ function populateSecondsSpans(timeStr) {
   }
 
 }
+
+// Change the color of the current <span> second without modifying the size.
 
 function highlightSecond(second) {
   for(let sec = 0; sec < 60; sec++) {
@@ -100,12 +116,12 @@ function highlightSecond(second) {
   }
 }
 
-// call when time is 3:15 for a bigger time of day.  Because it's fun!
+// call this when time is 3:14 for a bigger time of day.  Because it's fun!
 function bigTime () {
   document.getElementById("now").style.fontSize = "10vw"
 }
 
-
+// Initialize the clock
 function init() {
 
   // for 24-hour clock append to URL this: ?clock-type=24
@@ -128,7 +144,10 @@ function init() {
 
 }
 
-function currentTime() {
+// This is the main function of the clock.
+// It is scheduled so it is called once every second
+// 
+function processCurrentTime() {
   let time = new Date()    // creating object of Date class
 
   let month = time.getMonth() + 1
@@ -138,23 +157,65 @@ function currentTime() {
   let sec = time.getSeconds()
 
 
-  // 10:58 is near the beginning of Pi.
-  // for debugging or for screenshot you can uncomment these line:
-  //hour = 1
-  //min = 59
-  //sec = 45
+  ///////////////////////
+  ///// test code ///////
+  ///////////////////////
 
-  //hour = 3
-  //min = 14
-  //sec = 15
+  // By default all of this test code should be disabled.
+  // You can enable any given test by setting testXXXXX = true
+
+  testTopOfPage = false
+  if (testTopOfPage) {
+
+    // 10:58 is near the beginning of Pi.
+    // for debugging or for screenshot you can uncomment these line:
+    hour = 1
+    min = 59
+    sec = 45
+}
+
  
-  // Extra fun on Pi-day
-  //month = 3
-  //day = 14
-  //hour = 1
-  //min = 59
-  //hour = 15
-  //min = 9
+  testPiDay = false
+  if (testPiDay) {
+    // Extra fun on Pi-day
+    month = 3
+    day = 14
+    hour = 1
+    min = 59
+    //hour = 15
+    //min = 9
+  }
+
+
+  testPiTime = false
+  if (testPiTime) {
+    // test pi-time
+    // alternate time between 3:13 and 3:14
+    hour = 3
+    if (min%2) {
+      min = 13
+    } else {
+      min = 14
+    }
+  }
+
+
+  testNewHour = false
+  if (testNewHour) {
+    // test pi-time
+    // alternate time between 59 minutes and 00
+    if (min%2) {
+      min = 59
+    } else {
+      hour = hour + 1
+      min = 0
+    }
+  }
+
+
+  ////////////////////////////////////////
+  /////// process current time ///////////
+  ////////////////////////////////////////
 
   if (!initialized || previousHour != hour) {
     shouldChangeTheme = true
@@ -173,6 +234,9 @@ function currentTime() {
   previousMinute = min 
   previousHour = hour
 
+  // if this is AM/PM clock then subtract 12 hours
+  // and show 12am not 00am
+
   if (isClock12) {
     if (hour > 12) {
       hour = hour - 12
@@ -188,23 +252,32 @@ function currentTime() {
 
   pistring = pistringRaw
 
+  // insert <span> for every second in the current hour/minute
+  // Note: all <spans> for seconds are found AFTER the hour/minute <span>
+  // So make sure to run populateSecondsSpans() before adding
+  // the span for hour/minute
+
   populateSecondsSpans(timeString)
-  // hr/sec time should be before all other spans when adding it here
   addSpan("now", offset, 4)
   updatePiDigits()
 
-  // for fun, when the time is 3:14 (aka Pi-time make it huge
-  // plus some pi-day specials
+  // For fun, when the time is 3:14 (aka Pi-time) make it huge
+  // plus some other special things on pi-day
   if ((hour == 3 && min == 14) ||
       (month == 3 && day == 14 &&
         ((hour == 1 && min == 59) || (hour == 15 && min == 9)))) {
     bigTime()
   }
+
+  // auto-scroll the webpage to reveal the current time of day.
   scrollToNow()
 
-  //setTheme(theme)
-  // randomly change the colors every hour
+
   if (shouldChangeTheme) {
+  // randomly change the colors every hour
+  // Note: random also means there may not actually be a theme change
+  // but more often than not, the colors do change.
+  
     pickRandomTheme()
     shouldChangeTheme = false
   }
@@ -213,5 +286,5 @@ function currentTime() {
 }
 
 init()
-currentTime()  //calling currentTime() function to initiate the process
+processCurrentTime()  //calling processCurrentTime() function to initiate the process
 
