@@ -1,0 +1,32 @@
+#
+# Schedule pie delivery at specific times.
+# The python script relay.py triggers the solenoid for 1 second
+# any time it is called.  The Solenoid opens a gate at the top of
+# the pi-clock.  If there is pie available, it will slide down the
+# ramp for delivery.
+
+# Installation:
+
+# install the scheduled delivery times using this command:
+
+#   crontab pi-clock.cron 
+
+
+# deliver pie at 3:14:15 AM
+##### 14 3 * * * sleep 15; /usr/bin/python3 /home/pi/pi-clock/pi-delivery/deliver.py
+
+# deliver pie at 3:14 PM
+14 15 * * * sleep 15; /usr/bin/python3 /home/pi/pi-clock/pi-delivery/deliver.py
+
+# deliver pie on PI day: march 14th at 1:59 PM (3/14 1:59 PM)
+59 13 14 3 * /usr/bin/python3 /home/pi/pi-clock/pi-delivery/deliver.py
+
+# deliver pie on PI day: march 14th at 1:59:26 AM (3/14 1:59 AM)
+#### 59 1 14 3 * sleep 26; /usr/bin/python3 /home/pi/pi-clock/pi-delivery/deliver.py
+
+# TESTING or DEMO: deliver pie every minute at 15 seconds after the beginning of the minute
+# For a demo mode this can be accompanied by setting testPiTime = true in piclock.js
+#### *  *  *  *  * sleep 15; /usr/bin/python3 /home/pi/pi-clock/pi-delivery/deliver.py
+
+# TESTING ONLY: deliver pie every 5 minutes
+#### */5  *  *  *  * /usr/bin/python3 /home/pi/pi-clock/pi-delivery/deliver.py

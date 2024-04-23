@@ -37,6 +37,7 @@ hidetrash='y'
 hidemounts='y'
 autohidecursor='y'
 disableblanking='y'
+installpiedeliverygpio='y'
 
 function usage()
 {
@@ -56,6 +57,9 @@ function usage()
      --keep-trash         do not hide the trashcan icon
      --keep-mounts        do not hide sdcard mount icons
      --no-autohide-cursor do not automatically hide the mouse cursor on timeout
+     --no-pie-delivery    do not deliver pie at pi-time
+                              (Note: pie delivery requires GPIO
+                               gate and slide add-on)
      --no-extras          do not modify: splash screen, wallpaper, desktop icons
 
 HEREDOC
@@ -95,6 +99,7 @@ while [[ "$#" -gt 0 ]]; do
         --no-autohide-cursor) autohidecursor='n' ;;
         --keep-trash) hidetrash='n' ;;
         --keep-mounts) hidemounts='n' ;;
+        --no-pie-delivery) installpiedeliverygpio='n' ;; 
         --no-extras) installsplash='n'
                     installwallpaper='n'
                     hidetrash='n'
@@ -114,6 +119,8 @@ echo "Additional Fonts           = $installfonts"
 echo "hide trashcan icon         = $hidetrash"
 echo "hide sdcard mounts icons   = $hidemounts"
 echo "autohide mouse cursor      = $autohidecursor"
+echo "enable pie delivery        = $installpiedeliverygpio"
+
 echo
 timedatectl show | grep Timezone
 
@@ -269,4 +276,15 @@ if [ "$installhttp" == 'y' ]; then
         echo
     fi
 fi
+
+if [ "$installpiedeliverygpio" == 'y' ]; then
+
+    # schedule pie delivery at 3:14:15 PM every day
+    # and on pi-day 3/14 at 1:59
+    # This causes GPIO 4 to goggle high for one sceond once per day.
+
+    crontab /home/pi/pi-clock/pi-delivery/pi-clock.cron 
+
+fi
+
 
