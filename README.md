@@ -61,7 +61,7 @@ When it notices the a time change (hours and minutes):
 
 ## Python tools
 
-The python script tools/searchpi.py only exists for your reference.  It does not need to be installed for the webpage to work.  This is script I used to search through the digits of Pi for all the hours+minutes of the day.   The output is formatted as a javascript dictionary that can be use as data in the webpage.
+The python script tools/searchpi.py only exists for your reference.  It does not need to be installed for the webpage to work.  This is the script I used to search through the digits of Pi for all the hours+minutes of the day.   The output is formatted as a javascript dictionary that can be use as data in the webpage.
 
 The file piclockdata.js was created like this:
 
@@ -92,13 +92,24 @@ https://color.adobe.com/trends
 
 ![Alt Text](project_images/pi-clock-0159.png "1:59:45")
 
+### Pi Clock
+
+Colors based on the PLA I used in printing my case:
+
+![Alt Text](project_images/pi-clock-105829.png "0:58:29")
+
 ## Installation on Raspberry Pi
 
 Obviously the best possible computer to run this clock is on a Raspberry Pi!  It runs well on A Raspberry Pi 3, 4, and 5.  (The Pi Zero is not powerful enough to run a browser).
 
+### Note on Compatibility:
+ Mostly I tested this on a Raspberry Pi 5.  I've made some changes that *should* work on the earlier versions but I may not have revisited the older versions or Raspberry Pi.  If you run into an error, please create an issue and I will make sure to address it.
+
+### Touchscreen
 A 7-inch touchscreen display is a great option but any HTML monitor will work.  Touch screen or mouse is optional but recommended.  It is fun to scroll up adn down through the 100,000 digits of Pi.
 
-I created a script to convert you Raspberry Pi to a dedicated pi-clock.  But there are enough options so you can also minimize the installation if you prefer.
+### Default Install Fully Converts the Pi to a Clock
+I created a script to convert your Raspberry Pi to a dedicated pi-clock.  But there are enough options so you can also minimize the installation if you prefer.
 
 
 ### Fresh SD Card with Pi OS

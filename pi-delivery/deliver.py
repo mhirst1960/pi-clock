@@ -29,5 +29,5 @@ try:
     time.sleep(1)
     relay.set_value(0)
 finally:
-   relay.release()
+    relay.release()
 

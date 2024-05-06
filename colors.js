@@ -7,21 +7,24 @@
 */
 
 
-const themes = ["architecture", "botanico", "gnome", "piday"]
+const themes = ["architecture", "botanico", "gnome", "piday", "clockcase"]
 
 const themeColors = {
-    // name     body bg,     body fg, #now bg,  #now fg, #bigpi Decoration
+    // name     body bg,     body fg, #now bg,  #now fg, #bigpi Decoration, seconds
     "architecture":
-    ["#4F818C", "#01260A", "#01260A", "#F2A007", "#590202", "#F2A007"],
+               ["#4F818C", "#01260A", "#590202", "#F2A007", "#590202", "#F2A007"],
     
     "botanico":
-    ["#7ABF85", "#5888A6", "#484A73", "#BFB3A4", "#776AA6", "black"],
+                ["#7ABF85", "#5888A6", "#484A73", "#BFB3A4", "#776AA6", "black"],
 
     "gnome":
-    ["#A66D05", "#0D0D0D", "#2D3773", "#F25D07", "#8C8304", "#F25D07"],
+                ["#A66D05", "#0D0D0D", "#2D3773", "#F25D07", "#8C8304", "#F25D07"],
 
     "piday":
-    ["#618C80", "#F2D338", "#F28705", "#F24130", "#F28705", "#F24130"],
+                ["#618C80", "#F2D338", "#F28705", "#F24130", "#F28705", "#F24130"],
+
+    "clockcase": 
+                ["#1d4149", "#1c9e41", "black", "#8f3b1f", "#8f3b1f", "black"],
 
     }
 
@@ -46,6 +49,20 @@ function setSecondsThemeUnhighlighted (id) {
     el.style.color = currentTheme[THEME_FOREGROUND]
 }
 
+function updateColors() {
+    document.body.style.backgroundColor = currentTheme[THEME_BACKGROUND]
+    document.body.style.color = currentTheme[THEME_FOREGROUND]
+    
+
+    document.getElementById("pidigits").style.color = currentTheme[THEME_FOREGROUND]
+
+    document.getElementById("now").style.backgroundColor = currentTheme[THEME_NOW_BG]
+    document.getElementById("now").style.color = currentTheme[THEME_NOW_FG]
+
+    document.getElementById("bigpi").style.backgroundColor = currentTheme[THEME_BACKGROUND]
+    document.getElementById("bigpi").style.color = currentTheme[THEME_BIG_PI]
+}
+
 function setTheme (theme) {
 
     if (typeof theme === 'string' && theme instanceof String) {
@@ -56,30 +73,22 @@ function setTheme (theme) {
         themeName = themes[0]
     }
 
+
     //theme = themeColors["botanico"]
     //theme = themeColors["gnome"]
     //theme = themeColors["piday"]
-    theme = themeColors[themeName]
+    //currentTheme = themeColors["clockcase"]
 
-    currentTheme = theme
+    currentTheme = themeColors[themeName]
 
-    document.body.style.backgroundColor = theme[THEME_BACKGROUND]
-    document.body.style.color = theme[THEME_FOREGROUND]
-    
-
-    document.getElementById("pidigits").style.color = theme[THEME_FOREGROUND]
-
-    document.getElementById("now").style.backgroundColor = theme[THEME_NOW_BG]
-    document.getElementById("now").style.color = theme[THEME_NOW_FG]
-
-    document.getElementById("bigpi").style.backgroundColor = theme[THEME_BACKGROUND]
-    document.getElementById("bigpi").style.color = theme[THEME_BIG_PI]
-
-    currentTheme = theme
+    updateColors()
 
 }
 
 function pickRandomTheme() {
-    themeIndex = Math.floor(Math.random() * numThemes);
+    // random but does not repeat previous theme
+    do {
+        themeIndex = Math.floor(Math.random() * numThemes);
+    } while (themeColors[themeIndex] == currentTheme)
     setTheme(themeIndex)
 }

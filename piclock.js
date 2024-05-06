@@ -38,7 +38,7 @@ function scrollToNow() {
   var element = document.getElementById('now');
   var headerOffset = 45;
   var elementPosition = element.getBoundingClientRect().top;
-  var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  var offsetPosition = elementPosition + window.scrollY - headerOffset;
 
   window.scrollTo({
     top: offsetPosition,
@@ -204,7 +204,7 @@ function processCurrentTime() {
   if (testNewHour) {
     // test pi-time
     // alternate time between 59 minutes and 00
-    if (min%2) {
+    if (min%3) {
       min = 59
     } else {
       hour = hour + 1
@@ -260,6 +260,7 @@ function processCurrentTime() {
   populateSecondsSpans(timeString)
   addSpan("now", offset, 4)
   updatePiDigits()
+  updateColors()
 
   // For fun, when the time is 3:14 (aka Pi-time) make it huge
   // plus some other special things on pi-day
