@@ -96,7 +96,7 @@ https://color.adobe.com/trends
 
 Colors based on the PLA I used in printing my case:
 
-![Alt Text](project_images/pi-clock-105829.png "0:58:29")
+![Alt Text](project_images/pi-clock-105829.png "10:58:29")
 
 ## Installation on Raspberry Pi
 
