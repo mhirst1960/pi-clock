@@ -21,6 +21,8 @@ pistring = pistringRaw
 
 initialized = false
 shouldChangeTheme = true
+threeDigitAMPM = false  // set to true to hide the leading zero e.g. 800 pm not 0800 pm (disabled because I think 4 digits look nicer than three on this clock)
+
 previousTime = new Date();   // creating object of Date class
 let previousHour = previousTime.getHours();
 let previousMinute = previousTime.getMinutes();
@@ -249,6 +251,16 @@ function processCurrentTime() {
   minutesString = pad(min, 2)
   timeString = hourString + minutesString
   offset = piClockData[timeString][0]
+  hmLength = 4
+
+  if (threeDigitAMPM) {
+  // (Note: I think three digit-numbers look a little funny so default is *not* to remove leading zero)
+    if (isClock12 && hour < 10) {
+      offset = offset + 1 // non-leading zero 3-digit number
+      hmLength = 3
+    }
+  }
+
 
   pistring = pistringRaw
 
@@ -258,7 +270,7 @@ function processCurrentTime() {
   // the span for hour/minute
 
   populateSecondsSpans(timeString)
-  addSpan("now", offset, 4)
+  addSpan("now", offset, hmLength)
   updatePiDigits()
   updateColors()
 
