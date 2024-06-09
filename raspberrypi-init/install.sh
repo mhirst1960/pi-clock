@@ -196,47 +196,51 @@ fi
 
 if [ "$hidetrash" == 'y' ]; then
     echo hide trashcan..
-    sed -i s/show_trash=1/show_trash=0/ /home/pi/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
+    sed -i s/show_trash=1/show_trash=0/ $HOME/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
 fi
 
 if [ "$hidemounts" == 'y' ]; then
     echo hide mounts..
-    sed -i s/show_mounts=1/show_mounts=0/ /home/pi/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
+    sed -i s/show_mounts=1/show_mounts=0/ $HOME/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
 fi
 
-tail -1 /home/pi/.config/lxpanel/LXDE-pi/panels/panel | grep  point_at_menu >& /dev/null
+tail -1 $HOME/.config/lxpanel/LXDE-pi/panels/panel | grep  point_at_menu >& /dev/null
 havepointat=$?
 
 if [ "$autohidecursor" == 'y' ]; then
     echo automatically hide mouse cursor..
     if [ "$havepointat" == '0' ]; then
-        sed -i s/point_at_menu=1/point_at_menu=0/ /home/pi/.config/lxpanel/LXDE-pi/panels/panel
+        sed -i s/point_at_menu=1/point_at_menu=0/ $HOME/.config/lxpanel/LXDE-pi/panels/panel
     else
-        echo point_at_menu=0 >> /home/pi/.config/lxpanel/LXDE-pi/panels/panel
+        echo point_at_menu=0 >> $HOME/.config/lxpanel/LXDE-pi/panels/panel
     fi
 else
     echo NOT automatically hiding mouse cursor..
     if [ "$havepointat" == '0' ]; then
-        sed -i s/point_at_menu=0/point_at_menu=1/ /home/pi/.config/lxpanel/LXDE-pi/panels/panel
+        sed -i s/point_at_menu=0/point_at_menu=1/ $HOME/.config/lxpanel/LXDE-pi/panels/panel
     fi
 fi
 
 if [ "$runbrowser" == 'y' ]; then
-## TODO
-## on Raspberry Pi5 instead need add this to ~/.config/wayfair.ini:
-## [autostart]
-## chromium = chromium-browser "/home/pi/pi-clock/index.html" --kiosk --noerrdialogs --disable-infobars --no-first-run --ozone-platform=wayland --enable-features=OverlayScrollbar --start-maximized
-    ## Auto-start the Chrome browser and run the clock
+    ## On Raspberry Pi5, add this to ~/.config/wayfire.ini :
+    if [[ -e $HOME/.config/wayfire.ini  ]]; then
+        grep pi-clock/index.html $HOME/.config/wayfire.ini 
+        if [ $? -ne 0 ]; then
+            echo '[autostart]' >> $HOME/.config/wayfire.ini 
+            echo 'chromium = chromium-browser "$HOME/pi-clock/index.html" --kiosk --noerrdialogs --disable-infobars --no-first-run --ozone-platform=wayland --enable-features=OverlayScrollbar --start-maximized'  >> $HOME/.config/wayfire.ini 
+        fi
+    fi
+
     echo installing full-screen browser autostart...
 
-    mkdir -p /home/pi/.config/autostart/
+    mkdir -p $HOME/.config/autostart/
     if [ "$clockstyle" == '24' ]; then
-        cp $SCRIPT_DIR/piclock24.desktop /home/pi/.config/autostart/pi-clock.desktop
+        cp $SCRIPT_DIR/piclock24.desktop $HOME/.config/autostart/pi-clock.desktop
     else
-        cp $SCRIPT_DIR/piclock12.desktop /home/pi/.config/autostart/pi-clock.desktop
+        cp $SCRIPT_DIR/piclock12.desktop $HOME/.config/autostart/pi-clock.desktop
     fi
 else
-    rm -f /home/pi/.config/autostart/pi-clock.desktop 
+    rm -f $HOME/.config/autostart/pi-clock.desktop 
 fi
 
 if [ "$clockstyle" == '24' ]; then
@@ -247,14 +251,14 @@ fi
 
 #echo
 #echo 'If you want to hide the cursor, run this command:'
-#echo 'echo point_at_menu=0 >> /home/pi/.config/lxpanel/LXDE-pi/panels/panel'
+#echo 'echo point_at_menu=0 >> $HOME/.config/lxpanel/LXDE-pi/panels/panel'
 #echo
 
-if [ "$disableblanking" == 'y' ]; then
-    #disable screen blanking
-    mkdir -p /home/pi/.config/lxsession/LXDE-pi 
-    cp lxsession-autostart /home/pi/.config/lxsession/LXDE-pi/autostart
-fi
+#if [ "$disableblanking" == 'y' ]; then
+#    #disable screen blanking
+#    mkdir -p $HOME/.config/lxsession/LXDE-pi 
+#    cp lxsession-autostart $HOME/.config/lxsession/LXDE-pi/autostart
+#fi
 
 echo
 echo "Please Reboot now."
@@ -283,7 +287,7 @@ if [ "$installpiedeliverygpio" == 'y' ]; then
     # and on pi-day 3/14 at 1:59
     # This causes GPIO 4 to goggle high for one sceond once per day.
 
-    crontab /home/pi/pi-clock/pi-delivery/pi-clock.cron 
+    crontab $HOME/pi-clock/pi-delivery/pi-clock.cron 
 
 fi
 
