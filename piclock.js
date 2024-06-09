@@ -214,6 +214,17 @@ function processCurrentTime() {
     }
   }
 
+  // test line wrap
+  // 3:50, 4:16, 4:37, 4:50, 5:07
+  
+  //hour = 3
+  //min = 50
+
+  //hour = 4
+  //min = 50 // 37 // 16
+
+  //hour = 5
+  //min = 7
 
   ////////////////////////////////////////
   /////// process current time ///////////

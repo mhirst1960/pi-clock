@@ -8,6 +8,14 @@ piFile = 'pi100000.txt'
 #piFile = 'e100000.txt'
 time = '1415'
 
+# Adjust based on width of your screen so no time will wrap to next line
+charactersPerLine = 69
+
+# How wide is the 4-character highlighted time in units of normal characters
+#   Take any time of day.  It will take up a certain large amount of space on a line
+#   Count the number of normal-size characters on the next line directly under this big number
+howManySmallCharInFourBigChar = 8
+
 indexes = []
 
 def findInPi(fname, goal, start=0, bsize=4096):
@@ -21,7 +29,12 @@ def findInPi(fname, goal, start=0, bsize=4096):
             buffer = f.read(bsize)
             pos = buffer.find(goal)
             if pos >= 0:
-                return f.tell() - len(buffer) + pos
+                posInFile = f.tell() - len(buffer) + pos
+                linePos = posInFile % charactersPerLine
+                # avoid time spilling across to the next line
+                if linePos < charactersPerLine - howManySmallCharInFourBigChar :
+                    return posInFile
+                #print (f'//pick another pos = {posInFile}, line position = {linePos}')
             if not buffer:
                 return -1
             f.seek(f.tell() - overlap)
@@ -126,6 +139,8 @@ for hour in range(24):
                 # TODO print index dictionary sorted by index
                 #print (f"seconds: {secIndexes}")
                 for secIndex in secIndexes:
+                    if secIndex.offset > maxIndex:
+                        maxIndex = secIndex.offset
                     print(f'    [{secIndex.offset}, "sec{secIndex.secondStr}"],')
                 print (f']],')
 
