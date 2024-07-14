@@ -14,8 +14,10 @@ const themeColors = {
     "architecture":
                ["#4F818C", "#01260A", "#590202", "#F2A007", "#590202", "#F2A007"],
     
+    // purple on green  ["#7ABF85", "#5888A6", "#484A73", "#BFB3A4", "#776AA6", "black"],
+
     "botanico":
-                ["#7ABF85", "#5888A6", "#484A73", "#BFB3A4", "#776AA6", "black"],
+                ["#7ABF85", "black", "#776AA6", "#BFB3A4", "#484A73", "white"],
 
     "gnome":
                 ["#A66D05", "#0D0D0D", "#2D3773", "#F25D07", "#8C8304", "#F25D07"],
@@ -74,10 +76,11 @@ function setTheme (theme) {
     }
 
 
-    //theme = themeColors["botanico"]
-    //theme = themeColors["gnome"]
-    //theme = themeColors["piday"]
-    //currentTheme = themeColors["clockcase"]
+    //override random selection for testing:
+    //themeName = "botanico"
+    //themeName = "gnome"
+    //themeName = "piday"
+    //themeName = "clockcase"
 
     currentTheme = themeColors[themeName]
 
